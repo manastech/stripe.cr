@@ -11,7 +11,7 @@ class Stripe::Issuing::Card
     replacement_for : String? = nil,
     replacement_reason : String? = nil,
     shpping : String? = nil,
-    spending_controls : String? = nil,
+    spending_controls : NamedTuple? = nil,
   )
   add_update_method(
     status : String? = nil,
