@@ -108,7 +108,7 @@ class Stripe::Issuing::Cardholder
                   phone_number : String? = nil,
                   company : Company? = nil,
                   individual : Individual? = nil,
-                  spending_controls : NamedTuple = nil,
+                  spending_controls : NamedTuple? = nil,
                   status : String? = nil) : Stripe::Issuing::Cardholder
     io = IO::Memory.new
     builder = ParamsBuilder.new(io)
