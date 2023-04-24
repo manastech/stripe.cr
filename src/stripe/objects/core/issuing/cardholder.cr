@@ -104,7 +104,7 @@ class Stripe::Issuing::Cardholder
                   name : String,
                   type : String,
                   email : String?,
-                  metadata : NamedTuple = nil,
+                  metadata : NamedTuple? = nil,
                   phone_number : String? = nil,
                   company : Company? = nil,
                   individual : Individual? = nil,
