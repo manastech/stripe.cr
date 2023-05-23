@@ -54,7 +54,7 @@ class Stripe::Issuing::Cardholder
         user_agent : String?
       end
 
-      property user_terms_acceptance : Hash(String, String | Int32)?
+      property user_terms_acceptance : Hash(String, String | Int32 | Nil)?
     end
 
     property card_issuing : CardIssuing?
@@ -82,7 +82,7 @@ class Stripe::Issuing::Cardholder
                   metadata : Hash(String, String)? = nil,
                   phone_number : String? = nil,
                   company : Company? = nil,
-                  individual : Individual? = nil,
+                  individual : NamedTuple? = nil,
                   spending_controls : NamedTuple? = nil,
                   status : String? = nil)
     io = IO::Memory.new
@@ -107,7 +107,7 @@ class Stripe::Issuing::Cardholder
                   metadata : NamedTuple? = nil,
                   phone_number : String? = nil,
                   company : Company? = nil,
-                  individual : Individual? = nil,
+                  individual : NamedTuple? = nil,
                   spending_controls : NamedTuple? = nil,
                   status : String? = nil) : Stripe::Issuing::Cardholder
     io = IO::Memory.new

@@ -11,8 +11,7 @@ class Stripe::Issuing::Card
     replacement_for : String? = nil,
     replacement_reason : String? = nil,
     shpping : String? = nil,
-    spending_controls : NamedTuple? = nil,
-    individual : NamedTuple? = nil
+    spending_controls : NamedTuple? = nil
   )
   add_update_method(
     status : String? = nil,
@@ -59,28 +58,6 @@ class Stripe::Issuing::Card
   enum Type
     Phisical
     Virtual
-  end
-
-  struct Individual
-    include JSON::Serializable
-
-    struct CardIssuing
-      include JSON::Serializable
-
-      struct UserTermsAcceptance
-        include JSON::Serializable
-
-        @[JSON::Field(converter: Time::EpochConverter)]
-        property date : Time
-
-        property id : String?
-        property user_agent : String?
-      end
-
-      property user_terms_acceptance : UserTermsAcceptance?
-    end
-
-    property card_issuing : CardIssuing?
   end
 
   struct SpendingControls
