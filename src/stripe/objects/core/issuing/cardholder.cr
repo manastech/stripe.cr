@@ -25,20 +25,22 @@ class Stripe::Issuing::Cardholder
 
     struct Address
       include JSON::Serializable
-      property city : String?
-      property country : String?
-      property line1 : String?
-      property line2 : String?
-      property postal_code : String?
-      property state : String?
+
+      getter city : String?
+      getter country : String?
+      getter line1 : String?
+      getter line2 : String?
+      getter postal_code : String?
+      getter state : String?
     end
 
-    property address : Address?
+    getter address : Address?
   end
 
   struct Company
     include JSON::Serializable
-    property tax_id_provided : Bool?
+
+    getter tax_id_provided : Bool?
   end
 
   struct Individual
@@ -49,15 +51,17 @@ class Stripe::Issuing::Cardholder
 
       struct UserTermsAcceptance
         include JSON::Serializable
-        property date : Time?
-        property ip : String?
-        user_agent : String?
+
+        @[JSON::Field(converter: Time::EpochConverter)]
+        getter date : Time?
+        getter ip : String?
+        getter user_agent : String?
       end
 
-      property user_terms_acceptance : Hash(String, String | Int32 | Nil)?
+      getter user_terms_acceptance : UserTermsAcceptance?
     end
 
-    property card_issuing : CardIssuing?
+    getter card_issuing : CardIssuing?
   end
 
   getter id : String

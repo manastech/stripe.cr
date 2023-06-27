@@ -13,7 +13,7 @@ describe Stripe::Issuing::Cardholder do
       individual: {
         card_issuing: {
           user_terms_acceptance: {date: Time.utc.to_unix, ip: "0.0.0.0"},
-        }
+        },
       },
       billing: {
         address: {

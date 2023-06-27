@@ -13,6 +13,7 @@ class Stripe::Issuing::Card
     shpping : String? = nil,
     spending_controls : NamedTuple? = nil
   )
+
   add_update_method(
     status : String? = nil,
     cancellation_reason : String? = nil,
@@ -20,6 +21,7 @@ class Stripe::Issuing::Card
     pin : Hash(String, String)? = nil,
     spending_controls : String? = nil
   )
+
   add_list_method(
     cardholder : String? = nil,
     type : String? = nil,
@@ -31,11 +33,12 @@ class Stripe::Issuing::Card
     starting_after : String? = nil,
     ending_before : String? = nil
   )
+
   getter replacement_for : String?
   getter replacement_reason : ReplacementReason?
   getter shipping : Shipping?
-
   getter spending_controls : SpendingControls
+
   enum ReplacementReason
     Lost
     Stolen
@@ -65,6 +68,7 @@ class Stripe::Issuing::Card
 
     struct SpendingLimits
       include JSON::Serializable
+
       enum Interval
         PerAuthorization
         Daily
@@ -73,15 +77,16 @@ class Stripe::Issuing::Card
         Yearly
         AllTime
       end
-      property amount : Int32 = 0
-      property categories : Array(String)?
-      property interval : Interval?
+
+      getter amount : Int32 = 0
+      getter categories : Array(String)?
+      getter interval : Interval?
     end
 
-    property allowed_categories : Array(String)?
-    property blocked_categories : Array(String)?
-    property spending_limits : Array(SpendingLimits) = [] of SpendingLimits
-    property spending_limits_currency : String?
+    getter allowed_categories : Array(String)?
+    getter blocked_categories : Array(String)?
+    getter spending_limits : Array(SpendingLimits) = [] of SpendingLimits
+    getter spending_limits_currency : String?
   end
 
   struct Shipping
@@ -109,30 +114,30 @@ class Stripe::Issuing::Card
 
     struct Address
       include JSON::Serializable
-      property city : String
-      property country : String
-      property line1 : String
-      property postal_code : String
 
-      property line2 : String?
-      property state : String?
+      getter city : String
+      getter country : String
+      getter line1 : String
+      getter postal_code : String
+      getter line2 : String?
+      getter state : String?
     end
 
     struct Customs
       include JSON::Serializable
-      property eori_number : String?
+      getter eori_number : String?
     end
 
-    property name : String
-    property address : Address
-    property customs : Customs
-    property phone_number : String?
-    property require_signature : Bool?
-    property service : Service?
-    property status : Status?
-    property tracking_number : String?
-    property tracking_url : String?
-    property type : Type?
+    getter name : String
+    getter address : Address
+    getter customs : Customs
+    getter phone_number : String?
+    getter require_signature : Bool?
+    getter service : Service?
+    getter status : Status?
+    getter tracking_number : String?
+    getter tracking_url : String?
+    getter type : Type?
   end
 
   getter id : String
@@ -162,7 +167,6 @@ class Stripe::Issuing::Card
   getter replacement_for : String?
   getter replacement_reason : ReplacementReason?
   getter shipping : Shipping?
-
   getter spending_controls : SpendingControls
   getter? wallets : Hash(String, Hash(String, String | Bool | Nil)?)?
 
@@ -171,8 +175,8 @@ class Stripe::Issuing::Card
     builder = ParamsBuilder.new(io)
 
     {% for x in %w(expand) %}
-        builder.add({{x}}, {{x.id}}) unless {{x.id}}.nil?
-      {% end %}
+      builder.add({{x}}, {{x.id}}) unless {{x.id}}.nil?
+    {% end %}
 
     response = Stripe.client.get("/v1/issuing/cards/#{id}", form: io.to_s)
 
